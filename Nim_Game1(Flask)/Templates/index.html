@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nim Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Nim Game</h1>
+    <p>Current Player: {{ game.current_player }}</p>
+    <form method="POST">
+        <label for="pile_index">Select Pile:</label>
+        <select name="pile_index" id="pile_index">
+            {% for i in range(game.piles|length) %}
+                <option value="{{ i }}">Pile {{ i + 1 }} ({{ game.piles[i] }} stones)</option>
+            {% endfor %}
+        </select>
+        <label for="remove_count">Remove Stones:</label>
+        <input type="number" name="remove_count" id="remove_count" min="1">
+        <button type="submit">Make Move</button>
+    </form>
+    <ul>
+        {% for i in range(game.piles|length) %}
+            <li>Pile {{ i + 1 }}: {{ game.piles[i] }} stones</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
